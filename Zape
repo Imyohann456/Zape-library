@@ -1,0 +1,30 @@
+-- Roblox UI Library
+
+local RobloxUI = {}
+
+function RobloxUI.newButton(parent, text, callback)
+    local button = Instance.new("TextButton")
+    button.Parent = parent
+    button.Text = text
+    button.Size = UDim2.new(0, 200, 0, 50)
+    button.BackgroundColor3 = Color3.new(0.2, 0.6, 1)
+    button.TextColor3 = Color3.new(1, 1, 1)
+    button.FontSize = Enum.FontSize.Size18
+    button.MouseButton1Click:Connect(callback)
+
+    return button
+end
+
+function RobloxUI.newLabel(parent, text)
+    local label = Instance.new("TextLabel")
+    label.Parent = parent
+    label.Text = text
+    label.Size = UDim2.new(0, 200, 0, 30)
+    label.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
+    label.TextColor3 = Color3.new(0, 0, 0)
+    label.FontSize = Enum.FontSize.Size18
+
+    return label
+end
+
+return RobloxUI

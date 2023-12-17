@@ -2,45 +2,47 @@
 
 local UI = {}
 
--- Create a new button
-function UI.newButton(parent, position, size, text, callback)
+function UI.CreateFrame(name, parent, size, position, backgroundColor)
+    local frame = Instance.new("Frame")
+    frame.Name = name
+    frame.Parent = parent
+    frame.Size = size
+    frame.Position = position
+    frame.BackgroundColor3 = backgroundColor
+    return frame
+end
+
+function UI.CreateButton(name, parent, size, position, backgroundColor, textColor)
     local button = Instance.new("TextButton")
+    button.Name = name
     button.Parent = parent
-    button.Position = position
     button.Size = size
-    button.Text = text
-    button.MouseButton1Click:Connect(callback)
+    button.Position = position
+    button.BackgroundColor3 = backgroundColor
+    button.TextColor3 = textColor
     return button
 end
 
--- Create a new label
-function UI.newLabel(parent, position, size, text)
+function UI.CreateLabel(name, parent, size, position, textColor, text)
     local label = Instance.new("TextLabel")
+    label.Name = name
     label.Parent = parent
-    label.Position = position
     label.Size = size
+    label.Position = position
+    label.TextColor3 = textColor
     label.Text = text
     return label
 end
 
--- Create a new textbox
-function UI.newTextBox(parent, position, size, text)
-    local textbox = Instance.new("TextBox")
-    textbox.Parent = parent
-    textbox.Position = position
-    textbox.Size = size
-    textbox.Text = text
-    return textbox
-end
-
--- Create a new frame
-function UI.newFrame(parent, position, size, color)
-    local frame = Instance.new("Frame")
-    frame.Parent = parent
-    frame.Position = position
-    frame.Size = size
-    frame.BackgroundColor3 = color
-    return frame
+function UI.CreateTextBox(name, parent, size, position, backgroundColor, textColor)
+    local textBox = Instance.new("TextBox")
+    textBox.Name = name
+    textBox.Parent = parent
+    textBox.Size = size
+    textBox.Position = position
+    textBox.BackgroundColor3 = backgroundColor
+    textBox.TextColor3 = textColor
+    return textBox
 end
 
 return UI

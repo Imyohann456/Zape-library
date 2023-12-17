@@ -1,60 +1,31 @@
--- Roblox Draggable and Resizable UI Library
+-- Roblox UI Library
 
-local DraggableResizableUI = {}
+local Draggable = true,
+local RobloxUI = {}
 
-function DraggableResizableUI.newFrame(parent, size, scriptCallback)
-    local frame = Instance.new("Frame")
-    frame.Parent = parent
-    frame.Size = size
-    frame.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
+function RobloxUI.newButton(parent, text, callback)
+    local button = Instance.new("TextButton")
+    button.Parent = parent
+    button.Text = text
+    button.Size = UDim2.new(0, 200, 0, 50)
+    button.BackgroundColor3 = Color3.new(0.2, 0.6, 1)
+    button.TextColor3 = Color3.new(1, 1, 1)
+    button.FontSize = Enum.FontSize.Size18
+    button.MouseButton1Click:Connect(callback)
 
-    local script = Instance.new("LocalScript")
-    script.Parent = frame
-
-    -- Execute the script callback inside the frame
-    script.Source = "local scriptCallback = " .. tostring(scriptCallback) .. "\nscriptCallback()"
-
-    DraggableResizableUI.makeDraggable(frame)
-    DraggableResizableUI.makeResizable(frame)
-
-    return frame
+    return button
 end
 
-function DraggableResizableUI.makeDraggable(frame)
-    -- (Same draggable implementation as before)
+function RobloxUI.newLabel(parent, text)
+    local label = Instance.new("TextLabel")
+    label.Parent = parent
+    label.Text = text
+    label.Size = UDim2.new(0, 200, 0, 30)
+    label.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
+    label.TextColor3 = Color3.new(0, 0, 0)
+    label.FontSize = Enum.FontSize.Size18
+
+    return label
 end
 
-function DraggableResizableUI.makeResizable(frame)
-    local resizing
-    local startPos
-    local startSize
-
-    local function update(input)
-        local delta = input.Position - startPos
-        frame.Size = UDim2.new(startSize.X.Scale, startSize.X.Offset + delta.X, startSize.Y.Scale, startSize.Y.Offset + delta.Y)
-    end
-
-    frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            resizing = true
-            startPos = input.Position
-            startSize = frame.Size
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    resizing = false
-                end
-            end)
-        end
-    end)
-
-    frame.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement then
-            if resizing then
-                update(input)
-            end
-        end
-    end)
-end
-
-return DraggableResizableUI
+return RobloxUI

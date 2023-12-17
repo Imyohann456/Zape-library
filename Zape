@@ -1,31 +1,46 @@
--- Roblox UI Library
+-- UI Library
 
-local Draggable = true,
-local RobloxUI = {}
+local UI = {}
 
-function RobloxUI.newButton(parent, text, callback)
+-- Create a new button
+function UI.newButton(parent, position, size, text, callback)
     local button = Instance.new("TextButton")
     button.Parent = parent
+    button.Position = position
+    button.Size = size
     button.Text = text
-    button.Size = UDim2.new(0, 200, 0, 50)
-    button.BackgroundColor3 = Color3.new(0.2, 0.6, 1)
-    button.TextColor3 = Color3.new(1, 1, 1)
-    button.FontSize = Enum.FontSize.Size18
     button.MouseButton1Click:Connect(callback)
-
     return button
 end
 
-function RobloxUI.newLabel(parent, text)
+-- Create a new label
+function UI.newLabel(parent, position, size, text)
     local label = Instance.new("TextLabel")
     label.Parent = parent
+    label.Position = position
+    label.Size = size
     label.Text = text
-    label.Size = UDim2.new(0, 200, 0, 30)
-    label.BackgroundColor3 = Color3.new(0.8, 0.8, 0.8)
-    label.TextColor3 = Color3.new(0, 0, 0)
-    label.FontSize = Enum.FontSize.Size18
-
     return label
 end
 
-return RobloxUI
+-- Create a new textbox
+function UI.newTextBox(parent, position, size, text)
+    local textbox = Instance.new("TextBox")
+    textbox.Parent = parent
+    textbox.Position = position
+    textbox.Size = size
+    textbox.Text = text
+    return textbox
+end
+
+-- Create a new frame
+function UI.newFrame(parent, position, size, color)
+    local frame = Instance.new("Frame")
+    frame.Parent = parent
+    frame.Position = position
+    frame.Size = size
+    frame.BackgroundColor3 = color
+    return frame
+end
+
+return UI
